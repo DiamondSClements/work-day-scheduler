@@ -13,4 +13,5 @@ The time blocks for the planner are color coded based on the user's events; gray
 The planner automatically updates the date.
 
 
-![work-day-scheduler](https://github.com/DiamondSClements/work-day-scheduler/assets/143464442/6bdbfcb2-1e46-4f03-b6dd-a0e44723fa0a)
+
+![work-day-scheduler](https://github.com/DiamondSClements/work-day-scheduler/assets/143464442/ddaeb309-b0d6-4276-b5b4-f4a824546bd1)
