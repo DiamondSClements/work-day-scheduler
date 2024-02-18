@@ -36,8 +36,8 @@ $(function () {
   // useful when saving the description in local storage?
   //
   $(".saveBtn").on("click", function () {
-    var blockId = $(this).block().attr("id");
-    var eventDescription = $(this).event(".description").val();
+    var blockId = $(this).parent().attr("id");
+    var eventDescription = $(this).siblings(".description").val();
     
     localStorage.setItem(blockId, eventDescription);
   });
@@ -54,7 +54,7 @@ $(function () {
       var savedEvent = localStorage.getItem(blockId);
 
       if (savedEvent) {
-        $(this).post(".description").val(savedEvent);
+        $(this).children(".description").val(savedEvent);
       }
     });
   }
