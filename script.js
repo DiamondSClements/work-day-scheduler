@@ -6,7 +6,7 @@ $(function () {
   $("#currentDay").text(dayjs().format("dddd, MMMM D, YYYY"));
 
   function updateTimeBlocks() {
-    var currentHour = dayjs().hour();
+    const currentHour = dayjs().hour();
 
 
      // TODO: Add code to apply the past, present, or future class to each time
@@ -15,7 +15,7 @@ $(function () {
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
     $(".time-block").each(function () {
-      var blockHour = parseInt($(this).attr("id").split("-")[1]);
+      const blockHour = parseInt($(this).attr("id").split("-")[1]);
 
       if (blockHour < currentHour) {
         $(this).removeClass("present future").addClass("past");
@@ -35,9 +35,9 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  $(".saveBtn").on("click", function () {
-    var blockId = $(this).parent().attr("id");
-    var eventDescription = $(this).siblings(".description").val();
+  $(".container-lg").on("click",".saveBtn", function () {
+    const blockId = $(this).parent().attr("id");
+    const eventDescription = $(this).siblings(".description").val();
     
     localStorage.setItem(blockId, eventDescription);
   });
@@ -50,16 +50,30 @@ $(function () {
 
   function loadEvents() {
     $(".time-block").each(function () {
-      var blockId = $(this).attr("id");
-      var savedEvent = localStorage.getItem(blockId);
+      const blockId = $(this).attr("id");
+      const savedEvent = localStorage.getItem(blockId);
 
       if (savedEvent) {
-        $(this).children(".description").val(savedEvent);
+        $(this).find(".description").val(savedEvent);
       }
     });
   }
 
   loadEvents();
 
+// adding new block
+const currentHour = dayjs().hour();
+  for (let i = currentHour + 1; i <= currentHour + 5; i++) {
+    const blockId = "hour-" + i;
+    const timeLabel = dayjs().hour(i).format("hA");
+
+    const newBlock = $("<div>").attr("id", blockId).addClass("row time-block future");
+    newBlock.append('<div class="col-2 col-md-1 hour text-center py-3">' + timeLabel + '</div>');
+    newBlock.append('<textarea class="col-8 col-md-10 description" rows="3"></textarea>');
+    newBlock.append('<button class="btn saveBtn col-2 col-md-1" aria-label="save"><i class="fas fa-save" aria-hidden="true"></i></button>');
+
+    // Append the new block to the container
+    $(".container-lg").append(newBlock);
+  }
 
 });
